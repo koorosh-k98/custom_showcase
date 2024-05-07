@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Simform Solutions
+ * Copyright (c) 2024
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -253,6 +253,9 @@ class Showcase extends StatefulWidget {
   /// Defaults to 7.
   final double toolTipSlideEndDistance;
 
+  final bool isTop;
+  final double radius;
+
   const Showcase({
     required this.key,
     required this.description,
@@ -299,6 +302,8 @@ class Showcase extends StatefulWidget {
     this.onBarrierClick,
     this.disableBarrierInteraction = false,
     this.toolTipSlideEndDistance = 7,
+    required this.isTop,
+    required this.radius,
   })  : height = null,
         width = null,
         container = null,
@@ -340,6 +345,8 @@ class Showcase extends StatefulWidget {
     this.onBarrierClick,
     this.disableBarrierInteraction = false,
     this.toolTipSlideEndDistance = 7,
+    required this.isTop,
+    required this.radius,
   })  : showArrow = false,
         onToolTipClick = null,
         scaleAnimationDuration = const Duration(milliseconds: 300),
@@ -554,12 +561,10 @@ class _ShowcaseState extends State<Showcase> {
             widget.onBarrierClick?.call();
           },
           child: ClipPath(
-            clipper: RRectClipper(
+            clipper: CustomRRectClipper(
+              isTop: widget.isTop,
               area: _isScrollRunning ? Rect.zero : rectBound,
-              isCircle: widget.targetShapeBorder is CircleBorder,
-              radius: _isScrollRunning
-                  ? BorderRadius.zero
-                  : widget.targetBorderRadius,
+              radius: widget.radius,
               overlayPadding:
                   _isScrollRunning ? EdgeInsets.zero : widget.targetPadding,
             ),

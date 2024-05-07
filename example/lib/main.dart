@@ -4,7 +4,7 @@ import 'package:example/detailscreen.dart';
 import 'package:example/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:showcaseview/showcaseview.dart';
+import 'package:custom_showcase/custom_showcase.dart';
 
 void main() => runApp(const MyApp());
 
@@ -180,6 +180,8 @@ class _MailPageState extends State<MailPage> {
                                   children: <Widget>[
                                     Showcase(
                                       key: _one,
+                                      isTop: true,
+                                      radius: 50,
                                       description: 'Tap to see menu options',
                                       onBarrierClick: () =>
                                           debugPrint('Barrier clicked'),
@@ -219,6 +221,8 @@ class _MailPageState extends State<MailPage> {
                     Showcase(
                       targetPadding: const EdgeInsets.all(5),
                       key: _two,
+                      isTop: true,
+                      radius: 50,
                       title: 'Profile',
                       description:
                           "Tap to see profile which contains user's name, profile picture, mobile number and country",
@@ -277,6 +281,8 @@ class _MailPageState extends State<MailPage> {
       ),
       floatingActionButton: Showcase(
         key: _five,
+        isTop: true,
+        radius: 50,
         title: 'Compose Mail',
         description: 'Click here to compose mail',
         targetShapeBorder: const CircleBorder(),
@@ -315,6 +321,8 @@ class _MailPageState extends State<MailPage> {
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Showcase(
             key: key,
+            isTop: true,
+            radius: 50,
             description: 'Tap to check mail',
             tooltipPosition: TooltipPosition.top,
             disposeOnTap: true,
@@ -413,6 +421,8 @@ class MailTile extends StatelessWidget {
                 if (showCaseDetail)
                   Showcase.withWidget(
                     key: showCaseKey!,
+                    isTop: true,
+                    radius: 50,
                     height: 50,
                     width: 140,
                     targetShapeBorder: const CircleBorder(),

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Simform Solutions
+ * Copyright (c) 2024
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-library showcaseview;
+library custom_showcase;
 
 export 'src/enum.dart';
 export 'src/showcase.dart';

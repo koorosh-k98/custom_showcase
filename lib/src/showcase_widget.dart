@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Simform Solutions
+ * Copyright (c) 2024
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../showcaseview.dart';
+import '../custom_showcase.dart';
 import 'extension.dart';
 
 class ShowCaseWidget extends StatefulWidget {
@@ -103,7 +103,7 @@ class ShowCaseWidget extends StatefulWidget {
 
   static GlobalKey? activeTargetWidget(BuildContext context) {
     return context
-        .dependOnInheritedWidgetOfExactType<_InheritedShowCaseView>()
+        .dependOnInheritedWidgetOfExactType<_Inheritedcustom_showcase>()
         ?.activeWidgetIds;
   }
 
@@ -112,7 +112,7 @@ class ShowCaseWidget extends StatefulWidget {
     if (state != null) {
       return state;
     } else {
-      throw Exception('Please provide ShowCaseView context');
+      throw Exception('Please provide custom_showcase context');
     }
   }
 
@@ -257,22 +257,22 @@ class ShowCaseWidgetState extends State<ShowCaseWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return _InheritedShowCaseView(
+    return _Inheritedcustom_showcase(
       activeWidgetIds: ids?.elementAt(activeWidgetId!),
       child: widget.builder,
     );
   }
 }
 
-class _InheritedShowCaseView extends InheritedWidget {
+class _Inheritedcustom_showcase extends InheritedWidget {
   final GlobalKey? activeWidgetIds;
 
-  const _InheritedShowCaseView({
+  const _Inheritedcustom_showcase({
     required this.activeWidgetIds,
     required Widget child,
   }) : super(child: child);
 
   @override
-  bool updateShouldNotify(_InheritedShowCaseView oldWidget) =>
+  bool updateShouldNotify(_Inheritedcustom_showcase oldWidget) =>
       oldWidget.activeWidgetIds != activeWidgetIds;
 }

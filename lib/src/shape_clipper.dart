@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Simform Solutions
+ * Copyright (c) 2024
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -66,6 +66,54 @@ class RRectClipper extends CustomClipper<ui.Path> {
   @override
   bool shouldReclip(covariant RRectClipper oldClipper) =>
       isCircle != oldClipper.isCircle ||
+      radius != oldClipper.radius ||
+      overlayPadding != oldClipper.overlayPadding ||
+      area != oldClipper.area;
+}
+
+class CustomRRectClipper extends CustomClipper<ui.Path> {
+  final double radius;
+  final EdgeInsets overlayPadding;
+  final Rect area;
+  final bool isTop;
+
+  CustomRRectClipper({
+    this.radius = 20,
+    this.overlayPadding = EdgeInsets.zero,
+    this.area = Rect.zero,
+    this.isTop = true,
+  });
+
+  @override
+  ui.Path getClip(ui.Size size) {
+    Path topPath = Path()
+      ..lineTo(0.0, size.height - radius)
+      ..quadraticBezierTo(0.0, size.height, radius, size.height)
+      ..lineTo(size.width - radius, size.height)
+      ..quadraticBezierTo(
+          size.width, size.height, size.width, size.height - radius)
+      ..lineTo(size.width, radius)
+      ..quadraticBezierTo(size.width, 0.0, size.width - radius, 0.0)
+      ..lineTo(0.0, 0.0)
+      ..quadraticBezierTo(0.0, 0.0, 0.0, radius);
+
+    Path bottomPath = Path()
+      ..lineTo(0.0, size.height - radius)
+      ..quadraticBezierTo(0.0, size.height, radius, size.height)
+      ..lineTo(size.width - radius, size.height)
+      ..quadraticBezierTo(
+          size.width, size.height, size.width, size.height - radius)
+      ..lineTo(size.width, radius)
+      ..quadraticBezierTo(size.width, 0.0, size.width - radius, 0.0)
+      ..lineTo(0.0, 0.0)
+      ..quadraticBezierTo(0.0, 0.0, 0.0, radius);
+
+    return isTop ? topPath : bottomPath;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomRRectClipper oldClipper) =>
+      isTop != oldClipper.isTop ||
       radius != oldClipper.radius ||
       overlayPadding != oldClipper.overlayPadding ||
       area != oldClipper.area;

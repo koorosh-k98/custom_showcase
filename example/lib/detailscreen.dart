@@ -1,6 +1,6 @@
 import 'package:example/helper.dart';
 import 'package:flutter/material.dart';
-import 'package:showcaseview/showcaseview.dart';
+import 'package:custom_showcase/custom_showcase.dart';
 
 class Detail extends StatefulWidget {
   const Detail({Key? key}) : super(key: key);
@@ -51,6 +51,8 @@ class _DetailState extends State<Detail> {
                 children: <Widget>[
                   Showcase(
                     key: _one,
+                    isTop: true,
+                    radius: 50,
                     title: 'Title',
                     description: 'Desc',
                     child: InkWell(
