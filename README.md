@@ -1,7 +1,9 @@
 ![Showcaes View - Simform LLC.](https://raw.githubusercontent.com/SimformSolutionsPvtLtd/flutter_showcaseview/master/preview/banner.png)
 
 
-# Custom ShowCase
+# ShowCaseView
+
+[![Build](https://github.com/SimformSolutionsPvtLtd/flutter_showcaseview/workflows/Build/badge.svg?branch=master)](https://github.com/SimformSolutionsPvtLtd/flutter_showcaseview/actions) [![showcaseview](https://img.shields.io/pub/v/showcaseview?label=showcaseview)](https://pub.dev/packages/showcaseview)
 
 A Flutter package allows you to Showcase/Highlight your widgets step by step.
 
@@ -51,7 +53,7 @@ dependencies:
 
 2.  Import the package
 ```dart
-import 'package:showcaseview/custom_showcase.dart';
+import 'package:showcaseview/showcaseview.dart';
 ```
 
 3. Adding a `ShowCaseWidget` widget.
