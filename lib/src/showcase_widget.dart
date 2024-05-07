@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024
+ * Copyright (c) 2021 Simform Solutions
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -103,7 +103,7 @@ class ShowCaseWidget extends StatefulWidget {
 
   static GlobalKey? activeTargetWidget(BuildContext context) {
     return context
-        .dependOnInheritedWidgetOfExactType<_Inheritedcustom_showcase>()
+        .dependOnInheritedWidgetOfExactType<_InheritedCustomShowCase>()
         ?.activeWidgetIds;
   }
 
@@ -112,7 +112,7 @@ class ShowCaseWidget extends StatefulWidget {
     if (state != null) {
       return state;
     } else {
-      throw Exception('Please provide custom_showcase context');
+      throw Exception('Please provide ShowCaseView context');
     }
   }
 
@@ -257,22 +257,22 @@ class ShowCaseWidgetState extends State<ShowCaseWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return _Inheritedcustom_showcase(
+    return _InheritedCustomShowCase(
       activeWidgetIds: ids?.elementAt(activeWidgetId!),
       child: widget.builder,
     );
   }
 }
 
-class _Inheritedcustom_showcase extends InheritedWidget {
+class _InheritedCustomShowCase extends InheritedWidget {
   final GlobalKey? activeWidgetIds;
 
-  const _Inheritedcustom_showcase({
+  const _InheritedCustomShowCase({
     required this.activeWidgetIds,
     required Widget child,
   }) : super(child: child);
 
   @override
-  bool updateShouldNotify(_Inheritedcustom_showcase oldWidget) =>
+  bool updateShouldNotify(_InheritedCustomShowCase oldWidget) =>
       oldWidget.activeWidgetIds != activeWidgetIds;
 }
