@@ -89,28 +89,28 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
     Path topPath = Path()
       ..fillType = ui.PathFillType.evenOdd
       ..addRect(Offset.zero & size)
-      ..lineTo(0.0, area.size.height - radius)
-      ..quadraticBezierTo(0.0, area.size.height, radius, area.size.height)
-      ..lineTo(area.size.width - radius, area.size.height)
-      ..quadraticBezierTo(area.size.width, area.size.height, area.size.width,
+      ..relativeLineTo(0.0, area.size.height - radius)
+      ..relativeQuadraticBezierTo(0.0, area.size.height, radius, area.size.height)
+      ..relativeLineTo(area.size.width - radius, area.size.height)
+      ..relativeQuadraticBezierTo(area.size.width, area.size.height, area.size.width,
           area.size.height - radius)
-      ..lineTo(area.size.width, radius)
-      ..quadraticBezierTo(area.size.width, 0.0, area.size.width - radius, 0.0)
-      ..lineTo(radius, 0.0)
-      ..quadraticBezierTo(0.0, 0.0, 0.0, radius);
+      ..relativeLineTo(area.size.width, radius)
+      ..relativeQuadraticBezierTo(area.size.width, 0.0, area.size.width - radius, 0.0)
+      ..relativeLineTo(radius, 0.0)
+      ..relativeQuadraticBezierTo(0.0, 0.0, 0.0, radius);
 
     Path bottomPath = Path()
       ..fillType = ui.PathFillType.evenOdd
       ..addRect(Offset.zero & size)
-      ..lineTo(0.0, area.size.height - radius)
-      ..quadraticBezierTo(0.0, area.size.height, radius, area.size.height)
-      ..lineTo(area.size.width - radius, area.size.height)
-      ..quadraticBezierTo(area.size.width, area.size.height, area.size.width,
+      ..relativeLineTo(0.0, area.size.height - radius)
+      ..relativeQuadraticBezierTo(0.0, area.size.height, radius, area.size.height)
+      ..relativeLineTo(area.size.width - radius, area.size.height)
+      ..relativeQuadraticBezierTo(area.size.width, area.size.height, area.size.width,
           area.size.height - radius)
-      ..lineTo(area.size.width, radius)
-      ..quadraticBezierTo(area.size.width, 0.0, area.size.width - radius, 0.0)
-      ..lineTo(0.0, 0.0)
-      ..quadraticBezierTo(0.0, 0.0, 0.0, radius);
+      ..relativeLineTo(area.size.width, radius)
+      ..relativeQuadraticBezierTo(area.size.width, 0.0, area.size.width - radius, 0.0)
+      ..relativeLineTo(radius, 0.0)
+      ..relativeQuadraticBezierTo(0.0, 0.0, 0.0, radius);
 
     return isTop ? topPath : bottomPath;
   }
