@@ -561,10 +561,8 @@ class _ShowcaseState extends State<Showcase> {
             widget.onBarrierClick?.call();
           },
           child: ClipPath(
-            clipper: CustomRRectClipper(
-              isTop: widget.isTop,
+            clipper: RRectClipper(
               area: _isScrollRunning ? Rect.zero : rectBound,
-              radius: widget.radius,
               overlayPadding:
                   _isScrollRunning ? EdgeInsets.zero : widget.targetPadding,
             ),
