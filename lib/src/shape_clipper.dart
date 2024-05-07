@@ -87,24 +87,24 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
   @override
   ui.Path getClip(ui.Size size) {
     Path topPath = Path()
-      ..lineTo(0.0, size.height - radius)
-      ..quadraticBezierTo(0.0, size.height, radius, size.height)
-      ..lineTo(size.width - radius, size.height)
+      ..lineTo(0.0, area.size.height - radius)
+      ..quadraticBezierTo(0.0, area.size.height, radius, area.size.height)
+      ..lineTo(area.size.width - radius, area.size.height)
       ..quadraticBezierTo(
-          size.width, size.height, size.width, size.height - radius)
-      ..lineTo(size.width, radius)
-      ..quadraticBezierTo(size.width, 0.0, size.width - radius, 0.0)
-      ..lineTo(0.0, 0.0)
+          area.size.width, area.size.height, area.size.width, area.size.height - radius)
+      ..lineTo(area.size.width, radius)
+      ..quadraticBezierTo(area.size.width, 0.0, area.size.width - radius, 0.0)
+      ..lineTo(radius, 0.0)
       ..quadraticBezierTo(0.0, 0.0, 0.0, radius);
 
     Path bottomPath = Path()
-      ..lineTo(0.0, size.height - radius)
-      ..quadraticBezierTo(0.0, size.height, radius, size.height)
-      ..lineTo(size.width - radius, size.height)
+      ..lineTo(0.0, area.size.height - radius)
+      ..quadraticBezierTo(0.0, area.size.height, radius, area.size.height)
+      ..lineTo(area.size.width - radius, area.size.height)
       ..quadraticBezierTo(
-          size.width, size.height, size.width, size.height - radius)
-      ..lineTo(size.width, radius)
-      ..quadraticBezierTo(size.width, 0.0, size.width - radius, 0.0)
+          area.size.width, area.size.height, area.size.width, area.size.height - radius)
+      ..lineTo(area.size.width, radius)
+      ..quadraticBezierTo(area.size.width, 0.0, area.size.width - radius, 0.0)
       ..lineTo(0.0, 0.0)
       ..quadraticBezierTo(0.0, 0.0, 0.0, radius);
 
