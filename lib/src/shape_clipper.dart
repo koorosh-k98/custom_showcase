@@ -88,6 +88,7 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
   ui.Path getClip(ui.Size size) {
     Path topPath = Path()
       ..fillType = ui.PathFillType.evenOdd
+      ..addRect(Offset.zero & size)
       ..lineTo(0.0, area.size.height - radius)
       ..quadraticBezierTo(0.0, area.size.height, radius, area.size.height)
       ..lineTo(area.size.width - radius, area.size.height)
@@ -100,6 +101,7 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
 
     Path bottomPath = Path()
       ..fillType = ui.PathFillType.evenOdd
+      ..addRect(Offset.zero & size)
       ..lineTo(0.0, area.size.height - radius)
       ..quadraticBezierTo(0.0, area.size.height, radius, area.size.height)
       ..lineTo(area.size.width - radius, area.size.height)
