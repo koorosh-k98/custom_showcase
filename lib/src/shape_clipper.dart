@@ -86,18 +86,9 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
 
   @override
   ui.Path getClip(ui.Size size) {
-    final rect = Rect.fromLTRB(
-      area.left - overlayPadding.left,
-      area.top - overlayPadding.top,
-      area.right + overlayPadding.right,
-      area.bottom + overlayPadding.bottom,
-    );
-    Rect newRect = Rect.fromLTRB(rect.topLeft.dx, rect.topRight.dx,
-        rect.bottomRight.dx, rect.bottomLeft.dx);
     Path topPath = Path()
       ..fillType = ui.PathFillType.evenOdd
       ..addRect(Offset.zero & size)
-      ..addRect(newRect)
       ..lineTo(0.0, area.size.height - radius)
       ..quadraticBezierTo(0.0, area.size.height, radius, area.size.height)
       ..lineTo(area.size.width - radius, area.size.height)
@@ -111,7 +102,6 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
     Path bottomPath = Path()
       ..fillType = ui.PathFillType.evenOdd
       ..addRect(Offset.zero & size)
-      ..addRect(rect)
       ..lineTo(0.0, area.size.height - radius)
       ..quadraticBezierTo(0.0, area.size.height, radius, area.size.height)
       ..lineTo(area.size.width - radius, area.size.height)
