@@ -76,19 +76,21 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
   final EdgeInsets overlayPadding;
   final Rect area;
   final bool isTop;
+  final double thickness;
 
   CustomRRectClipper({
     this.radius = 20,
     this.overlayPadding = EdgeInsets.zero,
     this.area = Rect.zero,
     this.isTop = true,
+    this.thickness = 0,
   });
 
   @override
   ui.Path getClip(ui.Size size) {
     final points = [
-      area.bottomLeft,
-      area.bottomRight,
+      area.bottomLeft - Offset(0, 2 * thickness),
+      area.bottomRight - Offset(0, 4 * thickness),
       area.topRight,
       area.topLeft,
     ];

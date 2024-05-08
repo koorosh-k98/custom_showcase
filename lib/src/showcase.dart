@@ -255,6 +255,7 @@ class Showcase extends StatefulWidget {
 
   final bool isTop;
   final double radius;
+  final double thickness;
 
   const Showcase({
     required this.key,
@@ -304,6 +305,7 @@ class Showcase extends StatefulWidget {
     this.toolTipSlideEndDistance = 7,
     required this.isTop,
     required this.radius,
+    required this.thickness,
   })  : height = null,
         width = null,
         container = null,
@@ -347,6 +349,7 @@ class Showcase extends StatefulWidget {
     this.toolTipSlideEndDistance = 7,
     required this.isTop,
     required this.radius,
+    required this.thickness,
   })  : showArrow = false,
         onToolTipClick = null,
         scaleAnimationDuration = const Duration(milliseconds: 300),
@@ -565,6 +568,7 @@ class _ShowcaseState extends State<Showcase> {
               isTop: widget.isTop,
               area: _isScrollRunning ? Rect.zero : rectBound,
               radius: widget.radius,
+              thickness: widget.thickness,
               overlayPadding:
                   _isScrollRunning ? EdgeInsets.zero : widget.targetPadding,
             ),
