@@ -96,8 +96,11 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
     Path topPath = Path()
       ..fillType = ui.PathFillType.evenOdd
       ..addRect(Offset.zero & size)
+      ..arcToPoint(points[0], radius: Radius.circular(radius))
+      ..arcToPoint(points[1], radius: Radius.circular(radius))
+      ..arcToPoint(points[2], radius: Radius.circular(radius))
+      ..arcToPoint(points[3], radius: Radius.circular(radius))
       ..addPolygon(points, true);
-
 
     Path bottomPath = Path()
       ..fillType = ui.PathFillType.evenOdd
