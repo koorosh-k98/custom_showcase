@@ -102,7 +102,7 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
       ..lineTo(points[1].dx - radius, points[1].dy)
       ..quadraticBezierTo(
           points[1].dx, points[1].dy, points[1].dx, points[1].dy - radius)
-      ..lineTo(points[2].dx, points[2].dy - radius)
+      ..lineTo(points[2].dx, points[2].dy + radius)
       ..quadraticBezierTo(
           points[2].dx, points[2].dy, points[2].dx - radius, points[2].dy)
       ..lineTo(points[3].dx + radius, points[3].dy)
@@ -118,7 +118,7 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
       ..lineTo(points[1].dx - radius, points[1].dy)
       ..quadraticBezierTo(
           points[1].dx, points[1].dy, points[1].dx, points[1].dy - radius)
-      ..lineTo(points[2].dx, points[2].dy - radius)
+      ..lineTo(points[2].dx, points[2].dy + radius)
       ..quadraticBezierTo(
           points[2].dx, points[2].dy, points[2].dx - radius, points[2].dy)
       ..lineTo(points[3].dx + radius, points[3].dy)
