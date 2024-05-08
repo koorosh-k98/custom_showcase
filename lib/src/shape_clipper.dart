@@ -87,33 +87,43 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
   @override
   ui.Path getClip(ui.Size size) {
     final points = [
-      area.topLeft,
-      area.topRight,
-      area.bottomRight,
       area.bottomLeft,
+      area.bottomRight,
+      area.topRight,
+      area.topLeft,
     ];
 
     Path topPath = Path()
       ..fillType = ui.PathFillType.evenOdd
       ..addRect(Offset.zero & size)
-      ..arcToPoint(points[0], radius: Radius.circular(radius))
-      ..arcToPoint(points[1], radius: Radius.circular(radius))
-      ..arcToPoint(points[2], radius: Radius.circular(radius))
-      ..arcToPoint(points[3], radius: Radius.circular(radius))
-      ..addPolygon(points, true);
+      ..lineTo(points[0].dx, points[0].dy - radius)
+      ..quadraticBezierTo(
+          points[0].dx, points[0].dy, points[0].dx + radius, points[0].dy)
+      ..lineTo(points[1].dx - radius, points[1].dy)
+      ..quadraticBezierTo(
+          points[1].dx, points[1].dy, points[1].dx, points[1].dy - radius)
+      ..lineTo(points[2].dx, points[2].dy - radius)
+      ..quadraticBezierTo(
+          points[2].dx, points[2].dy, points[2].dx - radius, points[2].dy)
+      ..lineTo(points[3].dx + radius, points[3].dy)
+      ..quadraticBezierTo(
+          points[3].dx, points[3].dy, points[3].dx, points[3].dy + radius);
 
     Path bottomPath = Path()
       ..fillType = ui.PathFillType.evenOdd
       ..addRect(Offset.zero & size)
-      ..lineTo(0.0, area.size.height - radius)
-      ..quadraticBezierTo(0.0, area.size.height, radius, area.size.height)
-      ..lineTo(area.size.width - radius, area.size.height)
-      ..quadraticBezierTo(area.size.width, area.size.height, area.size.width,
-          area.size.height - radius)
-      ..lineTo(area.size.width, radius)
-      ..quadraticBezierTo(area.size.width, 0.0, area.size.width - radius, 0.0)
-      ..lineTo(0.0, 0.0)
-      ..quadraticBezierTo(0.0, 0.0, 0.0, radius);
+      ..lineTo(points[0].dx, points[0].dy - radius)
+      ..quadraticBezierTo(
+          points[0].dx, points[0].dy, points[0].dx + radius, points[0].dy)
+      ..lineTo(points[1].dx - radius, points[1].dy)
+      ..quadraticBezierTo(
+          points[1].dx, points[1].dy, points[1].dx, points[1].dy - radius)
+      ..lineTo(points[2].dx, points[2].dy - radius)
+      ..quadraticBezierTo(
+          points[2].dx, points[2].dy, points[2].dx - radius, points[2].dy)
+      ..lineTo(points[3].dx + radius, points[3].dy)
+      ..quadraticBezierTo(
+          points[3].dx, points[3].dy, points[3].dx, points[3].dy + radius);
 
     return isTop ? topPath : bottomPath;
   }
