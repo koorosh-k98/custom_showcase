@@ -89,8 +89,8 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
   @override
   ui.Path getClip(ui.Size size) {
     final points = [
-      area.bottomLeft - Offset(0, 2 * thickness),
-      area.bottomRight - Offset(0, 4 * thickness),
+      area.bottomLeft - Offset(0, thickness),
+      area.bottomRight - Offset(0, 2 * thickness),
       area.topRight,
       area.topLeft,
     ];
