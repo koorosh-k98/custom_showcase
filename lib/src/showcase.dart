@@ -253,6 +253,7 @@ class Showcase extends StatefulWidget {
   /// Defaults to 7.
   final double toolTipSlideEndDistance;
 
+  final bool isCustom;
   final bool isTop;
   final double radius;
   final double thickness;
@@ -303,9 +304,10 @@ class Showcase extends StatefulWidget {
     this.onBarrierClick,
     this.disableBarrierInteraction = false,
     this.toolTipSlideEndDistance = 7,
-    required this.isTop,
+    required this.isCustom,
+    this.isTop = false,
     this.radius = 0,
-    required this.thickness,
+    this.thickness = 0,
   })  : height = null,
         width = null,
         container = null,
@@ -347,9 +349,10 @@ class Showcase extends StatefulWidget {
     this.onBarrierClick,
     this.disableBarrierInteraction = false,
     this.toolTipSlideEndDistance = 7,
-    required this.isTop,
+    required this.isCustom,
+    this.isTop = false,
     this.radius = 0,
-    required this.thickness,
+    this.thickness = 0,
   })  : showArrow = false,
         onToolTipClick = null,
         scaleAnimationDuration = const Duration(milliseconds: 300),
@@ -564,14 +567,26 @@ class _ShowcaseState extends State<Showcase> {
             widget.onBarrierClick?.call();
           },
           child: ClipPath(
-            clipper: CustomRRectClipper(
-              isTop: widget.isTop,
-              area: _isScrollRunning ? Rect.zero : rectBound,
-              radius: widget.radius,
-              thickness: widget.thickness,
-              overlayPadding:
-                  _isScrollRunning ? EdgeInsets.zero : widget.targetPadding,
-            ),
+            clipper: widget.isCustom
+                ? CustomRRectClipper(
+                    isTop: widget.isTop,
+                    area: _isScrollRunning ? Rect.zero : rectBound,
+                    radius: widget.radius,
+                    thickness: widget.thickness,
+                    overlayPadding: _isScrollRunning
+                        ? EdgeInsets.zero
+                        : widget.targetPadding,
+                  )
+                : RRectClipper(
+                    area: _isScrollRunning ? Rect.zero : rectBound,
+                    isCircle: widget.targetShapeBorder is CircleBorder,
+                    radius: _isScrollRunning
+                        ? BorderRadius.zero
+                        : widget.targetBorderRadius,
+                    overlayPadding: _isScrollRunning
+                        ? EdgeInsets.zero
+                        : widget.targetPadding,
+                  ),
             child: blur != 0
                 ? BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
