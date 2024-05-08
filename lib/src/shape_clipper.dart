@@ -79,7 +79,7 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
   final double thickness;
 
   CustomRRectClipper({
-    this.radius = 20,
+    this.radius = 0,
     this.overlayPadding = EdgeInsets.zero,
     this.area = Rect.zero,
     this.isTop = true,
@@ -88,52 +88,43 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
 
   @override
   ui.Path getClip(ui.Size size) {
-    final points = [
-      area.bottomLeft - Offset(0, 0.75 * thickness),
-      area.bottomRight - Offset(0, 2.75 * thickness),
-      area.topRight,
-      area.topLeft,
-    ];
+    Offset bottomLeft = isTop
+        ? area.bottomLeft - Offset(0, 0.75 * thickness)
+        : const Offset(0, 0);
 
-    Path topPath = Path()
+    Offset bottomRight = isTop
+        ? area.bottomRight - Offset(0, 2.75 * thickness)
+        : const Offset(0, 0);
+
+    Offset topRight = isTop
+        ? const Offset(0, 0)
+        : area.topRight + Offset(0, 2.75 * thickness);
+
+    Offset topLeft =
+        isTop ? const Offset(0, 0) : area.topLeft + Offset(0, 0.75 * thickness);
+
+    return Path()
       ..fillType = ui.PathFillType.evenOdd
       ..addRect(Offset.zero & size)
-      ..moveTo(points[0].dx, points[0].dy - radius)
+      ..moveTo(bottomLeft.dx, bottomLeft.dy - radius)
       ..quadraticBezierTo(
-          points[0].dx, points[0].dy, points[0].dx + radius, points[0].dy)
-      ..lineTo(points[1].dx - radius, points[1].dy)
+          bottomLeft.dx, bottomLeft.dy, bottomLeft.dx + radius, bottomLeft.dy)
+      ..lineTo(bottomRight.dx - radius, bottomRight.dy)
+      ..quadraticBezierTo(bottomRight.dx, bottomRight.dy, bottomRight.dx,
+          bottomRight.dy - radius)
+      ..lineTo(topRight.dx, topRight.dy + radius)
       ..quadraticBezierTo(
-          points[1].dx, points[1].dy, points[1].dx, points[1].dy - radius)
-      ..lineTo(points[2].dx, points[2].dy + radius)
+          topRight.dx, topRight.dy, topRight.dx - radius, topRight.dy)
+      ..lineTo(topLeft.dx + radius, topLeft.dy)
       ..quadraticBezierTo(
-          points[2].dx, points[2].dy, points[2].dx - radius, points[2].dy)
-      ..lineTo(points[3].dx + radius, points[3].dy)
-      ..quadraticBezierTo(
-          points[3].dx, points[3].dy, points[3].dx, points[3].dy + radius);
-
-    Path bottomPath = Path()
-      ..fillType = ui.PathFillType.evenOdd
-      ..addRect(Offset.zero & size)
-      ..moveTo(points[0].dx, points[0].dy - radius)
-      ..quadraticBezierTo(
-          points[0].dx, points[0].dy, points[0].dx + radius, points[0].dy)
-      ..lineTo(points[1].dx - radius, points[1].dy)
-      ..quadraticBezierTo(
-          points[1].dx, points[1].dy, points[1].dx, points[1].dy - radius)
-      ..lineTo(points[2].dx, points[2].dy + radius)
-      ..quadraticBezierTo(
-          points[2].dx, points[2].dy, points[2].dx - radius, points[2].dy)
-      ..lineTo(points[3].dx + radius, points[3].dy)
-      ..quadraticBezierTo(
-          points[3].dx, points[3].dy, points[3].dx, points[3].dy + radius);
-
-    return isTop ? topPath : bottomPath;
+          topLeft.dx, topLeft.dy, topLeft.dx, topLeft.dy + radius);
   }
 
   @override
   bool shouldReclip(covariant CustomRRectClipper oldClipper) =>
       isTop != oldClipper.isTop ||
       radius != oldClipper.radius ||
+      thickness != oldClipper.thickness ||
       overlayPadding != oldClipper.overlayPadding ||
       area != oldClipper.area;
 }
