@@ -98,11 +98,11 @@ class CustomRRectClipper extends CustomClipper<ui.Path> {
 
     Offset topRight = isTop
         ? area.topRight + const Offset(0, 0)
-        : area.topRight + Offset(0, 2.75 * thickness);
+        : area.topRight + Offset(0, 0.75 * thickness);
 
     Offset topLeft = isTop
         ? area.topLeft + const Offset(0, 0)
-        : area.topLeft + Offset(0, 0.75 * thickness);
+        : area.topLeft + Offset(0, 2.75 * thickness);
 
     return Path()
       ..fillType = ui.PathFillType.evenOdd
